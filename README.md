@@ -3,8 +3,6 @@
 A lightweight FastAPI service for generating vector embeddings from text using [sentence-transformers](https://www.sbert.net/) models.
 Includes Redis caching, API key authentication, batch support.
 
----
-
 ## Features
 
 * Supports any HuggingFace model (e.g. `sentence-transformers`, `e5`, `bge`, `intfloat`, etc.)
@@ -12,8 +10,8 @@ Includes Redis caching, API key authentication, batch support.
 * Select model via query or environment variable
 * Redis caching (or fallback to in-memory LRU)
 * API key protection for all endpoints (except `/healthz`)
-
----
+* Docker-ready & CI/CD pipeline via GitHub Actions
+* Optimized multi-architecture builds (`amd64`, `arm64`) with caching
 
 ## Getting Started
 
@@ -44,8 +42,6 @@ services:
     image: redis:7
 ```
 
----
-
 ## API Endpoints
 
 > All endpoints require the `Key: your-secret-key` header except `/healthz`.
@@ -71,8 +67,6 @@ Example response:
 }
 ```
 
----
-
 ### `POST /embed-batch`
 
 Returns list of embeddings for a list of strings.
@@ -83,8 +77,6 @@ Returns list of embeddings for a list of strings.
   "model": "intfloat/e5-small-v2"
 }
 ```
-
----
 
 ### `GET /healthz`
 
@@ -98,8 +90,6 @@ Simple health check. No API key required.
 }
 ```
 
----
-
 ## Authorization
 
 All API endpoints except `/healthz` require this header:
@@ -107,8 +97,6 @@ All API endpoints except `/healthz` require this header:
 ```http
 Key: your-secret-key
 ```
-
----
 
 ## Running Tests
 
@@ -118,8 +106,6 @@ pytest
 ```
 
 Tests are located in the `tests/` directory.
-
----
 
 ## License
 
